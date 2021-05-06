@@ -18,7 +18,6 @@ scores.each do |n|
 end
 
 frames.each_with_index do |f, index|
-  puts "#{index} #{f}"
   next_frame = index + 1
   if index <= 8
     if f[0] == 10
@@ -28,7 +27,7 @@ frames.each_with_index do |f, index|
       else
         frames[next_frame][1]
       end
-    elsif frame.sum == 10
+    elsif f.sum == 10
       point += 10 + frames[next_frame][0]
     else
       point += f.sum
