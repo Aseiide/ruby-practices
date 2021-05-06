@@ -2,13 +2,23 @@
 
 score = ARGV[0]
 scores = score.split(',')
-shots = []
+frame = []
+frames = []
+
 scores.each do |n|
-  case n
-  when 'X'
-    shots << 10
+  if n == 'X'
+    frame << 10
   else
-    shots << n.to_i
+    frame << n.to_i
+  end
+
+  if frame.count == 1 && frame.first == 10
+    frames << frame
+    frame = []
+  elsif frame.count == 2
+    frames << frame
+    frame = []
   end
 end
-p shots
+p frame
+p frames
