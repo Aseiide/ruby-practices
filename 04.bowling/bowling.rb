@@ -33,6 +33,7 @@ frames.each_with_index do |f, index|
       point += f.sum
     end
   else # 10フレーム
+    binding.irb
     point += f.sum
   end
 end
