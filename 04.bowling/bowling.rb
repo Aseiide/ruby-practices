@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 score = ARGV[0]
@@ -22,11 +23,11 @@ frames.each_with_index do |f, index|
   if index <= 8
     if f[0] == 10
       point += 10 + frames[next_frame][0]
-      point += if frames[0] == 10
-        frames[next_frame + 1][0]
-      else
-        frames[next_frame][1]
-      end
+      point += if frames[next_frame][0] == 10
+                frames[next_frame + 1][0]
+               else
+                frames[next_frame][1]
+               end
     elsif f.sum == 10
       point += 10 + frames[next_frame][0]
     else
