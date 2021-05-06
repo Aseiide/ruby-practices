@@ -2,18 +2,18 @@
 
 score = ARGV[0]
 scores = score.split(',')
-shots = []
+frame = []
 scores.each do |s|
   if s == 'X'
-    shots << 10
-    shots << 0
+    frame << 10
+    frame << 0
   else
-    shots << s.to_i
+    frame << s.to_i
   end
 end
 
 frames = []
-shots.each_slice(2) do |s|
+frame.each_slice(2) do |s|
   frames << s
 end
 
