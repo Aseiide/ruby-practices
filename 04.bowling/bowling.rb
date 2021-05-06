@@ -20,4 +20,25 @@ scores.each do |n|
     frame = []
   end
 end
-p frames
+puts "frames= #{frames}"
+
+# 計算のロジックを書いていく
+# とりあえず1~9フレーム目まで
+point = 0
+frames.each.with_index do |k, i|
+  binding.irb
+  # puts "#{i} #{k}"
+  point += if i != 8 && i != 9
+              if frames[i][0] == 10 && frames[i+1][0] == 10 && frames[i+2][0] == 10
+                30
+              elsif frames[i][0] == 10 && frames[i+1][0] == 10
+                20
+              elsif frames[i][0] == 10
+                10
+              elsif k.sum == 10
+                frames[i+1][0] + 10
+              else
+                k.sum
+              end
+            end
+end
