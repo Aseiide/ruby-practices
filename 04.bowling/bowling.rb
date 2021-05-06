@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 score = ARGV[0]
@@ -20,7 +19,7 @@ end
 
 frames.each_with_index do |f, index|
   next_frame = index + 1
-  if index <= 8
+  if index <= 8 # 1~9フレーム
     if f[0] == 10
       point += 10 + frames[next_frame][0]
       if frames[next_frame][0] == 10
@@ -33,12 +32,11 @@ frames.each_with_index do |f, index|
     else
       point += f.sum
     end
-  else
+  else # 10フレーム
     point += f.sum
   end
 end
 p point
-
 
 # テストケース
 # 6,3,9,0,0,3,8,2,7,3,X,9,1,8,0,X,6,4,5 134となりダメ 139
