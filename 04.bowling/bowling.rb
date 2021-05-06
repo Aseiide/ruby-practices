@@ -24,9 +24,9 @@ frames.each_with_index do |f, index|
     if f[0] == 10
       point += 10 + frames[next_frame][0]
       if frames[next_frame][0] == 10
-        frames[next_frame + 1][0]
+        point += frames[next_frame + 1][0]
       else
-        frames[next_frame][1]
+        point += frames[next_frame][1]
       end
 
       if f.sum == 10
@@ -37,17 +37,15 @@ frames.each_with_index do |f, index|
     else
       point += f.sum
     end
-  else
-    point += f.sum
   end
 end
 p point
 
 
 # テストケース
-# 6,3,9,0,0,3,8,2,7,3,X,9,1,8,0,X,6,4,5 ok
-# 6,3,9,0,0,3,8,2,7,3,X,9,1,8,0,X,X,X,X 167となりダメ.正:164
-# 0,10,1,5,0,0,0,0,X,X,X,5,1,8,1,0,4 145となりダメ.正:107
-# 6,3,9,0,0,3,8,2,7,3,X,9,1,8,0,X,X,0,0 147となりダメ.正:134
-# X,X,X,X,X,X,X,X,X,X,X,X 390となりダメ.正:300
+# 6,3,9,0,0,3,8,2,7,3,X,9,1,8,0,X,6,4,5 134となりダメ 139
+# 6,3,9,0,0,3,8,2,7,3,X,9,1,8,0,X,X,X,X 148となりダメ.正:164
+# 0,10,1,5,0,0,0,0,X,X,X,5,1,8,1,0,4 157となりダメ.正:107
+# 6,3,9,0,0,3,8,2,7,3,X,9,1,8,0,X,X,0,0 138となりダメ.正:134
+# X,X,X,X,X,X,X,X,X,X,X,X 450となりダメ.正:300
 # 0,0,0,0,0,0,0,0,0,0,0,0 ok
