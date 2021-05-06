@@ -4,6 +4,7 @@ score = ARGV[0]
 scores = score.split(',')
 frames = []
 frame = []
+point = 0
 
 scores.each do |n|
   n == 'X' ? frame << 10 : frame << n.to_i
@@ -15,3 +16,26 @@ scores.each do |n|
     frame = []
   end
 end
+
+frames.each_with_index do |f, index|
+  puts "#{index} #{f}"
+  next_frame = index + 1
+  if index <= 8
+    if f[0] == 10
+      point += 10 + frames[next_frame][0]
+      point += if frames[0] == 10
+        frames[next_frame + 1][0]
+      else
+        frames[next_frame][1]
+      end
+    elsif frame.sum == 10
+      point += 10 + frames[next_frame][0]
+    else
+      point += f.sum
+    end
+  else
+    point += f.sum
+  end
+end
+
+p point
