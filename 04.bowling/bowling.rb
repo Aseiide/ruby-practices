@@ -20,5 +20,4 @@ scores.each do |n|
     frame = []
   end
 end
-p frame
 p frames
