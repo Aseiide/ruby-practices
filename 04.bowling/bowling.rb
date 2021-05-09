@@ -15,7 +15,7 @@ end
 frames = shots.each_slice(2).to_a
 
 point = 0
-frames.each_with_index do |f, index|
+frames.each_with_index.sum do |f, index|
   next_frame = index.next
   if index <= 8 # 1~9フレーム
     if f[0] == 10
