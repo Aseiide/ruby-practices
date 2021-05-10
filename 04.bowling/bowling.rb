@@ -19,11 +19,10 @@ point = frames.each_with_index.sum do |f, index|
   if index <= 8 # 1~9フレーム
     if f[0] == 10
       if frames[next_frame][0] == 10
-        frames[next_frame + 1][0]
+        20 +frames[next_frame + 1][0]
       else
-        frames[next_frame][1]
+        10 + frames[next_frame][0] + frames[next_frame][1]
       end
-      10 + frames[next_frame][0]
     elsif f.sum == 10
       10 + frames[next_frame][0]
     else
