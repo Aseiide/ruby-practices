@@ -5,10 +5,6 @@ require 'optparse'
 option = ARGV.getopts('l')
 @files = ARGV
 
-total_lines = 0
-total_words = 0
-total_bytes = 0
-
 # 引数がなかった時
 # 標準入力して改行数、単語数、バイト数、ファイル名を出力
 def non_argument
@@ -30,6 +26,10 @@ end
 
 # 引数ありの処理
 def has_argument
+  total_lines = 0
+  total_words = 0
+  total_bytes = 0
+
   @files.each do |file|
     content = File.read(file)
     lines = content.count("\n")
@@ -45,8 +45,8 @@ def has_argument
   end
 end
 
-if @file == []
-  has_argument
-else
+if @files == []
   non_argument
+else
+  has_argument
 end
