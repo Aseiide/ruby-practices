@@ -3,14 +3,17 @@
 require 'optparse'
 option = ARGV.getopts('l')
 
-
 # オプションなしを実装していく
 text = $stdin.read
 
-p text.count("\n")
+p lines = text.count("\n")
 p word = text.split(/\s+/).size
-p text.bytesize
+p bytes = text.bytesize
 
+# -lオプションの実装
+if option["l"]
+  p lines = text.count("\n")
+end
 # 引数ありのとき
 # 引数に受けたファイルの改行数・単語数・バイト数とfile名をputsする
 
