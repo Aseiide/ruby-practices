@@ -5,6 +5,10 @@ require 'optparse'
 option = ARGV.getopts('l')
 @files = ARGV
 
+total_lines = 0
+total_words = 0
+total_bytes = 0
+
 # 引数がなかった時
 # 標準入力して改行数、単語数、バイト数、ファイル名を出力
 def non_argument
@@ -15,38 +19,30 @@ def non_argument
   puts "#{lines} #{words} #{bytes}"
 end
 
-# -lオプションの実装
-# 改行数だけを出力
-def l_option
-  @files.each do |file|
-    content = File.read(file)
-    puts content.count("\n")
-  end
-end
-
 # 引数ありの処理
 def has_argument
-  total_lines = 0
-  total_words = 0
-  total_bytes = 0
-
   @files.each do |file|
     content = File.read(file)
     lines = content.count("\n")
     words = content.split(/\s+/).size
     bytes = content.bytesize
-  
-    total_lines += content.count("\n")
-    total_words += content.split(/\s+/).size
-    total_bytes += content.bytesize
-  
     puts "#{lines} #{words} #{bytes} #{file}"
-    puts "#{total_lines} #{total_words} #{total_bytes} total"
   end
+  puts_total if 
 end
 
-if @files == []
-  non_argument
-else
-  has_argument
+# トータルを計算する処理を切り出す
+def calc_total
+  total_lines += content.count("\n")
+  total_words += content.split(/\s+/).size
+  total_bytes += content.bytesize
+end
+
+# トータルを表示する処理
+def puts_total
+    puts total_lines
+  if option["l"] == false
+    puts total_words
+    puts total_bytes
+  end
 end
