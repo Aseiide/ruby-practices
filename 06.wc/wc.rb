@@ -44,3 +44,9 @@ def has_argument
     puts "#{total_lines} #{total_words} #{total_bytes} total"
   end
 end
+
+if @file == []
+  has_argument
+else
+  non_argument
+end
