@@ -13,21 +13,24 @@ p text.bytesize
 
 # 引数ありのとき
 # 引数に受けたファイルの改行数・単語数・バイト数とfile名をputsする
-total_lines = 0
-total_words = 0
-total_bytes = 0
 
-files = ARGV
-files.each do |file|
-  content = File.read(file)
-  lines = content.count("\n")
-  words = content.split(/\s+/).size
-  bytes = content.bytesize
+def has_argv
+  total_lines = 0
+  total_words = 0
+  total_bytes = 0
 
-  total_lines += content.count("\n")
-  total_words += content.split(/\s+/).size
-  total_bytes += content.bytesize
+  files = ARGV
+  files.each do |file|
+    content = File.read(file)
+    lines = content.count("\n")
+    words = content.split(/\s+/).size
+    bytes = content.bytesize
 
-  puts "#{lines} #{words} #{bytes} #{file}"
-  puts "#{total_lines} #{total_words} #{total_bytes} total"
+    total_lines += content.count("\n")
+    total_words += content.split(/\s+/).size
+    total_bytes += content.bytesize
+
+    puts "#{lines} #{words} #{bytes} #{file}"
+    puts "#{total_lines} #{total_words} #{total_bytes} total"
+  end
 end
