@@ -8,10 +8,10 @@ require 'optparse'
 # 引数がなかった時
 # 標準入力して改行数、単語数、バイト数、ファイル名を出力
 def non_argument
-  text = $stdin.read
-  lines = text.count("\n")
-  words = text.split(/\s+/).size
-  bytes = text.bytesize
+  @contents = $stdin.read
+  lines = @contents.count("\n")
+  words = @contents.split(/\s+/).size
+  bytes = @contents.bytesize
   puts "#{lines} #{words} #{bytes}"
 end
 
@@ -29,9 +29,7 @@ end
 
 # トータルを計算する処理を切り出す
 def calc_total
-  @total_lines = 0
-  @total_words = 0
-  @total_bytes = 0
+  @total_lines = @total_words = @total_bytes = 0
   @total_lines += @lines
   @total_words += @words
   @total_bytes += @bytes
@@ -39,11 +37,9 @@ end
 
 # トータルを表示する処理
 def display_total
-    print @total_lines
-  if @option["l"] == false
-    print @total_words
-    print @total_bytes
-  end
+  print @total_lines
+  print @total_words
+  print @total_bytes
 end
 
 if @files == []
