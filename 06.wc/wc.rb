@@ -34,13 +34,11 @@ def argument?
 end
 
 def result
-  if @option['l'] == true
-    print @lines.to_s.rjust(8)
-  else
-    print @lines.to_s.rjust(8)
-    print @words.to_s.rjust(8)
-    print @bytes.to_s.rjust(8)
-  end
+  print @lines.to_s.rjust(8)
+  return unless @option['l'] == false
+
+  print @words.to_s.rjust(8)
+  print @bytes.to_s.rjust(8)
 end
 
 def calc_lines_words_bytes
