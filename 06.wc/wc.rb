@@ -4,11 +4,20 @@ require 'optparse'
 
 @option = ARGV.getopts('l')
 @files = ARGV
-if @files == []
-  @contents = $stdin.read
-else
-  has_argument
+
+def main
+  if @files == []
+    @contents = $stdin.read
+    non_argument
+  else
+    has_argument
   end
+end
+
+def non_argument
+  calc_lines_words_bytes
+  result
+  puts
 end
 
 def has_argument
@@ -17,12 +26,16 @@ def has_argument
     calc_lines_words_bytes
     result
     print "#{file}"
+    puts
+    calc_total
   end
+  display_total if @files[1]
 end
 
 def result
-  print @lines
-  unless @option['l']
+  if @option['l'] == true
+    print @lines.to_s.rjust(8)
+  else
     print @lines.to_s.rjust(8)
     print @words.to_s.rjust(8)
     print @bytes.to_s.rjust(8)
@@ -30,21 +43,9 @@ def result
 end
 
 def calc_lines_words_bytes
-  @lines = calc_lines(str)
-  @words = calc_words(str)
-  @bytes = calc_bytes(str)
-end
-
-def calc_lines(str)
-  str.count("\n")
-end
-
-def calc_words(str)
-  str.split(/\s+/).size
-end
-
-def calc_bytes(str)
-  str.bytesize
+  @lines = @contents.count("\n")
+  @words = @contents.split(/\s+/).size
+  @bytes = @contents.bytesize
 end
 
 def calc_total
@@ -55,9 +56,15 @@ def calc_total
 end
 
 def display_total
-  print @total_lines.to_s.rjust(8)
   if @option['l'] == false
+    print @total_lines.to_s.rjust(8)
     print @total_words.to_s.rjust(8)
     print @total_bytes.to_s.rjust(8)
+  else
+    print @total_lines.to_s.rjust(8)
   end
+  print "total"
+  puts
 end
+
+main
