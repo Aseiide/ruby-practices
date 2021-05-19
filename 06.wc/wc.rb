@@ -9,68 +9,36 @@ if @files == []
 else
   @files.each do |file|
     @contents = File.read(file)
-    @lines = @contents.count("\n")
-    @words = @contents.split(/\s+/).size
-    @bytes = @contents.bytesize
+    calc_lines_words_bytes
   end
 end
 
-# 引数がなしの時
-# 標準入力の改行数、バイト数、単語数を表示
-# lオプションのときだけ改行数を表示する
-if @files == [] && @option['l'] == false
+def calc_lines_words_bytes
   @lines = @contents.count("\n")
   @words = @contents.split(/\s+/).size
   @bytes = @contents.bytesize
+end
+
+# 引数がなしの時
+if @files == [] && @option['l'] == false
+  calc_lines_words_bytes
   puts "#{@lines} #{@words} #{@bytes}"
 elsif @files == [] && @option['l'] == true
   @lines = @contents.count("\n")
   printf "%7d\n", @lines
 end
 
-
-# def calc_lines_words_bytes
-#   @lines = @contents.count("\n")
-#   @words = @contents.split(/\s+/).size
-#   @bytes = @contents.bytesize
-# end
-
-# def result
-#   if @option['l'] == true
-#     puts @lines
-#   else
-#     print @lines
-#     print @words
-#     print @bytes
-#   end
-# end
-# # 引数がなかった時
-# # 標準入力して改行数、単語数、バイト数、ファイル名を出力
-# def non_argument
-
-#   puts "#{lines} #{words} #{bytes}"
-# end
-
-# # 引数ありの処理
-# def has_argument
-#   @files.each do |file|
-#     @contents = File.read(file)
-#     puts "#{@lines} #{@words} #{@bytes} #{@file}"
-#   end
-#   display_total
-# end
-
-# # トータルを計算する処理を切り出す
-# def calc_total
-#   @total_lines = @total_words = @total_bytes = 0
-#   @total_lines += @lines
-#   @total_words += @words
-#   @total_bytes += @bytes
-# end
-
-# # トータルを表示する処理
-# def display_total
-#   print @total_lines
-#   print @total_words
-#   print @total_bytes
-# end
+# 引数ありの時
+# 引数あり && オプションなし, 引数あり && オプションあり
+if @files != [] && @option["l"] == false
+  @files.each do |file|
+    @contents = File.read(file)
+    calc_lines_words_bytes
+    puts "#{@lines} #{@words} #{@bytes} #{file}"
+  end
+  total_lines = total_words = total_bytes = 0
+  total_lines += @lines
+  total_words += @words
+  total_bytes += @bytes
+  puts "#{total_lines} #{total_words} #{total_bytes} total"
+end
