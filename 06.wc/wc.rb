@@ -54,15 +54,13 @@ def calc_total
 end
 
 def display_total
-  if @option['l'] == false
-    print @total_lines.to_s.rjust(8)
-    print @total_words.to_s.rjust(8)
-    print @total_bytes.to_s.rjust(8)
-  else
-    print @total_lines.to_s.rjust(8)
-  end
+  print @total_lines.to_s.rjust(8)
   print ' total'
   puts
+  return unless @option['l'] == false
+
+  print @total_words.to_s.rjust(8)
+  print @total_bytes.to_s.rjust(8)
 end
 
 main
