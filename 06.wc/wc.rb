@@ -10,6 +10,7 @@ def main
     @contents = $stdin.read
     non_argument
   else
+    @total_lines = @total_words = @total_bytes = 0
     has_argument
   end
 end
@@ -49,7 +50,6 @@ def calc_lines_words_bytes
 end
 
 def calc_total
-  @total_lines = @total_words = @total_bytes = 0
   @total_lines += @contents.count("\n")
   @total_words += @contents.split(/\s+/).size
   @total_bytes += @contents.bytesize
