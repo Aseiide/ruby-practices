@@ -30,7 +30,7 @@ def argument?
     puts
     calc_total
   end
-  display_total if @files[1]
+  display_total if @files != []
 end
 
 def result
