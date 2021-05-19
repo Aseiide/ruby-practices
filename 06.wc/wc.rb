@@ -25,7 +25,7 @@ if @files == [] && @option['l'] == false
   puts "#{@lines} #{@words} #{@bytes}"
 elsif @files == [] && @option['l'] == true
   @lines = @contents.count("\n")
-  puts "#{@lines}"
+  printf "%7d\n", @lines
 end
 
 
