@@ -25,7 +25,7 @@ def has_argument
     @contents = File.read(file)
     calc_lines_words_bytes
     result
-    print "#{file}"
+    print " #{file}"
     puts
     calc_total
   end
@@ -63,7 +63,7 @@ def display_total
   else
     print @total_lines.to_s.rjust(8)
   end
-  print "total"
+  print " total"
   puts
 end
 
