@@ -63,7 +63,7 @@ def display_total
   else
     print @total_lines.to_s.rjust(8)
   end
-  print " total"
+  print ' total'
   puts
 end
 
