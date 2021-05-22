@@ -4,13 +4,13 @@ require 'optparse'
 require 'etc'
 
 options = ARGV.getopts('a', 'l', 'r')
-if options['a']
-  files = Dir.glob('*', File::FNM_DOTMATCH)
-elsif options['r']
-  files = Dir.glob('*').reverse
-else
-  files = Dir.glob('*')
-end
+files = if options['a']
+          Dir.glob('*', File::FNM_DOTMATCH)
+        elsif options['r']
+          Dir.glob('*').reverse
+        else
+          Dir.glob('*')
+        end
 
 if options['l']
   def file_type(type)
