@@ -4,6 +4,10 @@
 require 'optparse'
 
 @option = ARGV.getopts('l')
+
+if @option.empty?
+  @option['l'] == true
+end
 @files = ARGV
 
 def main
