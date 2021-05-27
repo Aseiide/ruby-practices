@@ -7,7 +7,7 @@ require 'optparse'
 @files = ARGV
 
 def main
-  if @files == []
+  if @files.empty?
     @contents = $stdin.read
     non_argument
   else
@@ -27,8 +27,7 @@ def argument?
     @contents = File.read(file)
     calc_lines_words_bytes
     result
-    print " #{file}"
-    puts
+    puts " #{file}"
     calc_total
   end
   display_total if @files != []
