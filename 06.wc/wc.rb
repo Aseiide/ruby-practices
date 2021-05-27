@@ -12,7 +12,7 @@ def main
     non_argument
   else
     @total_lines = @total_words = @total_bytes = 0
-    argument?
+    with_argument
   end
 end
 
@@ -22,7 +22,7 @@ def non_argument
   puts
 end
 
-def argument?
+def with_argument
   @files.each do |file|
     @contents = File.read(file)
     calc_lines_words_bytes
