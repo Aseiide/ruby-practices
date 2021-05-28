@@ -21,40 +21,42 @@ def main
 end
 
 def non_argument
-  calc_lines_words_bytes
-  result
+  lines, words, bytes = calc_lines_words_bytes
+  result(lines, words, bytes)
   puts
 end
 
 def with_argument
   @files.each do |file|
     @contents = File.read(file)
-    calc_lines_words_bytes
-    result
+    lines, words, bytes = calc_lines_words_bytes
+    result(lines, words, bytes)
     puts " #{file}"
-    calc_total
+    calc_total(lines, words, bytes)
   end
   display_total if @files != []
 end
 
-def result
-  print @lines.to_s.rjust(8)
+def show_result(lines, words, bytes)
+  
+  print lines.to_s.rjust(8)
   return unless @option['l'] == false
 
-  print @words.to_s.rjust(8)
-  print @bytes.to_s.rjust(8)
+  print words.to_s.rjust(8)
+  print bytes.to_s.rjust(8)
 end
 
 def calc_lines_words_bytes
-  @lines = @contents.count("\n")
-  @words = @contents.split(/\s+/).size
-  @bytes = @contents.bytesize
+  lines = @contents.count("\n")
+  words = @contents.split(/\s+/).size
+  bytes = @contents.bytesize
+  [lines, words, bytes]
 end
 
-def calc_total
-  @total_lines += @lines
-  @total_words += @words
-  @total_bytes += @bytes
+def calc_total(lines, words, bytes)
+  @total_lines += lines
+  @total_words += words
+  @total_bytes += bytes
 end
 
 def display_total
