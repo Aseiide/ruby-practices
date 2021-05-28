@@ -52,9 +52,9 @@ def calc_lines_words_bytes
 end
 
 def calc_total
-  @total_lines += @contents.count("\n")
-  @total_words += @contents.split(/\s+/).size
-  @total_bytes += @contents.bytesize
+  @total_lines += @lines
+  @total_words += @words
+  @total_bytes += @bytes
 end
 
 def display_total
