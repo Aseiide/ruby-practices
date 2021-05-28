@@ -5,9 +5,6 @@ require 'optparse'
 
 @option = ARGV.getopts('l')
 
-if @option.empty?
-  @option['l'] == true
-end
 @files = ARGV
 
 def main
@@ -22,7 +19,7 @@ end
 
 def non_argument
   lines, words, bytes = calc_lines_words_bytes
-  result(lines, words, bytes)
+  show_result(lines, words, bytes)
   puts
 end
 
@@ -30,15 +27,16 @@ def with_argument
   @files.each do |file|
     @contents = File.read(file)
     lines, words, bytes = calc_lines_words_bytes
-    result(lines, words, bytes)
+    show_result(lines, words, bytes)
     puts " #{file}"
     calc_total(lines, words, bytes)
   end
   display_total if @files != []
 end
 
+# @option == true の形で書いてみる
 def show_result(lines, words, bytes)
-  
+
   print lines.to_s.rjust(8)
   return unless @option['l'] == false
 
