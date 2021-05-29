@@ -14,7 +14,7 @@ files = if options['a']
 
 if options['l']
   def file_type(type)
-    file_type = {
+    {
       'file' => '-',
       'directory' => 'd',
       'link' => 'l'
