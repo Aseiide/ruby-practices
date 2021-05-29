@@ -34,7 +34,6 @@ def with_argument
   display_total if @files != []
 end
 
-# @option == true の形で書いてみる
 def show_result(lines, words, bytes)
 
   print lines.to_s.rjust(8)
