@@ -9,24 +9,24 @@ require 'optparse'
 
 def main
   if @files.empty?
-    @contents = $stdin.read
-    non_argument
+    contents = $stdin.read
+    non_argument(contents)
   else
     @total_lines = @total_words = @total_bytes = 0
-    with_argument
+    with_argument(contents)
   end
 end
 
-def non_argument
-  lines, words, bytes = calc_lines_words_bytes
+def non_argument(contents)
+  lines, words, bytes = calc_lines_words_bytes(contents)
   show_result(lines, words, bytes)
   puts
 end
 
-def with_argument
+def with_argument(contents)
   @files.each do |file|
-    @contents = File.read(file)
-    lines, words, bytes = calc_lines_words_bytes
+    contents = File.read(file)
+    lines, words, bytes = calc_lines_words_bytes(contents)
     show_result(lines, words, bytes)
     puts " #{file}"
     calc_total(lines, words, bytes)
@@ -43,10 +43,10 @@ def show_result(lines, words, bytes)
   print bytes.to_s.rjust(8)
 end
 
-def calc_lines_words_bytes
-  lines = @contents.count("\n")
-  words = @contents.split(/\s+/).size
-  bytes = @contents.bytesize
+def calc_lines_words_bytes(contents)
+  lines = contents.count("\n")
+  words = contents.split(/\s+/).size
+  bytes = contents.bytesize
   [lines, words, bytes]
 end
 
