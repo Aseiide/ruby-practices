@@ -1,34 +1,49 @@
 # frozen_string_literal: true
 
-# 非スペアかつ非ストライクのとき、first_shotとsecond_shotをsum
-# スペアのとき、フレーム.sum + 次のshot
-# ストライクのとき、10 + 次のフレーム.sum
-
 require './shot'
 
+STRIKE = 10
+
 class Frame
-  attr_reader :first_shot, :second_shot, third_shot
+  attr_reader :first_shot, :second_shot, :third_shot
 
-  def initialize(first_mark, second_mark = nil, third_mark = nil)
-    @first_shot = Shot.new(first_mark)
-    @second_shot = Shot.new(second_mark)
-    @third_shot = Shot.new(third_mark)
+  def initialize(first_shot, second_shot = nil, third_shot = nil)
+    @first_shot = Shot.new(first_shot)
+    @second_shot = Shot.new(second_shot)
+    @third_shot = Shot.new(third_shot)
   end
 
-  # 1フレームのスコア
-  def score
-    [@first_shot.score, @second_shot.score, @third_shot.score].sum
+  def not_last_frame?(index)
+    index < 9
   end
 
-  def strike?
-    @first_shot.score == 10
+  def score(index, next_frame_marks, after_next_frame_marks)
+    if strike? && not_last_frame?(index)
+      strike_score(index, next_frame_marks, after_next_frame_marks)
+    elsif spare? && not_last_frame?(index)
+      spare_score(next_frame_marks)
+    else
+      first_shot.score + second_shot.score + third_shot.score
+    end
   end
 
   def spare?
-    @first_shot.score != 10 && [@first_shot.score, @second_shot.score].sum == 10
+    @first_shot.score != STRIKE && [@first_shot.score, @second_shot.score].sum == 10
   end
 
-  def base_score
-    @first_shot.score + @second_shot.score if strike? == false && spare? == false
+  def spare_score(next_frame)
+    first_shot.score + second_shot.score + Frame.new(next_frame).first_shot.score
+  end
+
+  def strike?
+    @first_shot.score == STRIKE
+  end
+
+  def strike_score(index, next_frame_marks, after_next_frame_marks)
+    next_frame = Frame.new(next_frame_marks)
+    after_next_frame = Frame.new(after_next_frame_marks) unless after_next_frame_marks.nil?
+
+    bonus_point = next_frame.first_shot.score != STRIKE || index == 8 ? next_frame.second_shot.score : after_next_frame.first_shot.score
+    first_shot.score + next_frame.first_shot.score + bonus_point
   end
 end
