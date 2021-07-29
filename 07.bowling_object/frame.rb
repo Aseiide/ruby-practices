@@ -32,7 +32,7 @@ class Frame
   end
 
   def spare_score(next_frame)
-    first_shot.score + second_shot.score + Frame.new(next_frame).first_shot.score
+    first_shot.score + second_shot.score + Frame.new(*next_frame).first_shot.score
   end
 
   def strike?
@@ -40,8 +40,8 @@ class Frame
   end
 
   def strike_score(index, next_frame_marks, after_next_frame_marks)
-    next_frame = Frame.new(next_frame_marks)
-    after_next_frame = Frame.new(after_next_frame_marks) unless after_next_frame_marks.nil?
+    next_frame = Frame.new(*next_frame_marks)
+    after_next_frame = Frame.new(*after_next_frame_marks) unless after_next_frame_marks.nil?
 
     bonus_point = next_frame.first_shot.score != STRIKE || index == 8 ? next_frame.second_shot.score : after_next_frame.first_shot.score
     first_shot.score + next_frame.first_shot.score + bonus_point
