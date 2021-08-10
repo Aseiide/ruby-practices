@@ -28,7 +28,5 @@ class Game
       end
     end
     frames << shots
-    # irb(#<Game:0x00007fd1a2942ca0>):001:0> frames
-    # => [[6, 3], [9, 0], [0, 3], [8, 2], [7, 3], [10, 0], [9, 1], [8, 0], [10, 0], [6, 4, 5]]
   end
 end
