@@ -10,12 +10,6 @@ class Command
     @r_option = r_option
   end
 
-  def self.call_output
-    options = ARGV.getopts('a', 'l', 'r')
-    command = Command.new(a_option: options['a'], l_option: options['l'], r_option: options['r'])
-    command.output
-  end
-
   def output
     file_paths = @a_option ? Dir.glob('*', File::FNM_DOTMATCH) : Dir.glob('*')
     sorted_file_paths = @r_option ? file_paths.reverse : file_paths
