@@ -27,16 +27,18 @@ class Frame
     end
   end
 
+  private
+
   def spare?
     @first_shot.score != STRIKE && [@first_shot.score, @second_shot.score].sum == 10
   end
 
-  def spare_score(next_frame)
-    first_shot.score + second_shot.score + Frame.new(*next_frame).first_shot.score
-  end
-
   def strike?
     @first_shot.score == STRIKE
+  end
+
+  def spare_score(next_frame)
+    first_shot.score + second_shot.score + Frame.new(*next_frame).first_shot.score
   end
 
   def strike_score(index, next_frame_marks, after_next_frame_marks)
