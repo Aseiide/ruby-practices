@@ -13,14 +13,14 @@ class Frame
     @third_shot = Shot.new(third_shot)
   end
 
-  def not_last_frame?(index)
+  def last_frame?(index)
     index < 9
   end
 
   def score(index, next_frame_marks, after_next_frame_marks)
-    if strike? && not_last_frame?(index)
+    if strike? && last_frame?(index)
       strike_score(index, next_frame_marks, after_next_frame_marks)
-    elsif spare? && not_last_frame?(index)
+    elsif spare? && last_frame?(index)
       spare_score(next_frame_marks)
     else
       first_shot.score + second_shot.score + third_shot.score
