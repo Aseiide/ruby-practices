@@ -23,14 +23,14 @@ class Frame
     elsif spare? && last_frame?(index)
       spare_score(next_frame_marks)
     else
-      first_shot.score + second_shot.score + third_shot.score
+      @first_shot.score + @second_shot.score + @third_shot.score
     end
   end
 
   private
 
   def spare?
-    @first_shot.score != STRIKE && [@first_shot.score, @second_shot.score].sum == 10
+    first_shot.score != STRIKE && [first_shot.score, second_shot.score].sum == 10
   end
 
   def strike?
