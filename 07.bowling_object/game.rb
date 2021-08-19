@@ -18,13 +18,11 @@ class Game
 
     frames = []
     9.times do
-      # frame = shots.shift(2)
-
-      if shots.first == STRIKE
-        frames << [shots.shift, 0]
-      else
-        frames << shots.shift(2)
-      end
+      frames << if shots.first == STRIKE
+                  [shots.shift, 0]
+                else
+                  shots.shift(2)
+                end
     end
     frames << shots
   end
