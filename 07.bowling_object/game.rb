@@ -3,14 +3,12 @@
 require './frame'
 
 class Game
-  attr_reader :marks_list
-
   def initialize(argv)
     @marks_list = separate_frames(argv)
   end
 
   def calc_score
-    marks_list.map.with_index { |frame, index| Frame.new(*frame).score(index, marks_list[index.next], marks_list[index.next.next]) }.sum
+    @marks_list.map.with_index { |frame, index| Frame.new(*frame).score(index, @marks_list[index.next], @marks_list[index.next.next]) }.sum
   end
 
   def separate_frames(argv)
