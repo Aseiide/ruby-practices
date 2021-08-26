@@ -13,7 +13,7 @@ class LongOption
       print "#{file_detail.nlink.to_s.rjust(2)} "
       print "#{file_detail.uid}  #{file_detail.gid}  "
       print "#{file_detail.size.to_s.rjust(4)} "
-      print "#{file_detail.mtime} "
+      print "#{file_detail.mtime.strftime('%_m %_d %H:%M')} "
       print file_detail.path
       puts "\n"
     end
