@@ -12,7 +12,7 @@ class ShortOption
     transposed_file_details = transpose_file_details(@file_details)
     transposed_file_details.each do |file_details|
       file_details.each do |file_detail|
-        print file_detail.path.ljust(PADDING) if file_detail
+        print file_detail.file_path.ljust(PADDING) if file_detail
       end
       puts
     end
