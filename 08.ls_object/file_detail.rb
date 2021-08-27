@@ -9,7 +9,7 @@ class FileDetail
   end
 
   def type
-    @file_stat.directory?
+    @file_stat.directory? ? 'd' : '-'
   end
 
   def nlink

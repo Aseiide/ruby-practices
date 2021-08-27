@@ -20,7 +20,7 @@ class LongOption
     total_file_blocks = @file_details.sum(&:blocks)
     puts "total #{total_file_blocks}"
     @file_details.each do |file_detail|
-      print "#{file_detail.type ? 'd' : '-'}#{to_permissions(file_detail.permission)} "
+      print "#{file_detail.type}#{to_permissions(file_detail.permission)} "
       print "#{file_detail.nlink.to_s.rjust(2)} "
       print "#{file_detail.uid}  #{file_detail.gid}  "
       print "#{file_detail.size.to_s.rjust(4)} "
