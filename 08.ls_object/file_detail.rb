@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FileDetail
-  attr_reader :file_path, :file_stat
+  attr_reader :file_path
 
   def initialize(file_path, file_stat)
     @file_path = file_path
@@ -34,10 +34,6 @@ class FileDetail
 
   def mtime
     @file_stat.mtime
-  end
-
-  def path
-    @file_path
   end
 
   def blocks

@@ -25,7 +25,7 @@ class LongOption
       print "#{file_detail.uid}  #{file_detail.gid}  "
       print "#{file_detail.size.to_s.rjust(4)} "
       print "#{file_detail.mtime.strftime('%_m %_d %H:%M')} "
-      print file_detail.path
+      print file_detail.file_path
       puts "\n"
     end
   end
