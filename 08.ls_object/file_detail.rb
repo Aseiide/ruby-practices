@@ -3,13 +3,13 @@
 class FileDetail
   attr_reader :file_path
 
-  def initialize(file_path, file_stat)
+  def initialize(file_path)
     @file_path = file_path
-    @file_stat = file_stat
+    @file_stat = File::Stat.new(file_path)
   end
 
-  def type
-    @file_stat.directory? ? 'd' : '-'
+  def type?
+    @file_stat.directory?
   end
 
   def nlink
