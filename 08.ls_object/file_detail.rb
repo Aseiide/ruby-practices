@@ -8,7 +8,7 @@ class FileDetail
     @file_stat = File::Stat.new(file_path)
   end
 
-  def type?
+  def directory?
     @file_stat.directory?
   end
 
