@@ -4,11 +4,11 @@ require './frame'
 
 class Game
   def initialize(argv)
-    @marks_list = separate_frames(argv)
+    @frames = separate_frames(argv)
   end
 
   def calc_score
-    @marks_list.map.with_index { |frame, index| Frame.new(*frame).score(index, @marks_list[index.next], @marks_list[index.next.next]) }.sum
+    @frames.map.with_index { |frame, index| Frame.new(*frame).score(index, @frames[index.next], @frames[index.next.next]) }.sum
   end
 
   def separate_frames(argv)
