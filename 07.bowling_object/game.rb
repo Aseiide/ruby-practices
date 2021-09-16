@@ -8,16 +8,16 @@ class Game
   end
 
   def calc_score
-    @frames.map.with_index { |frame, index| Frame.new(*frame).score(index, @frames[index.next], @frames[index.next.next]) }.sum
+    @frames.map.with_index { |frame, index| Frame.new(frame).score(index, @frames[index.next], @frames[index.next.next]) }.sum
   end
 
   def separate_frames(argv)
-    shots = argv.split(',').map { |shot| shot == 'X' ? STRIKE : shot.to_i }
+    shots = argv.split(',').map { |m| Shot.new(m) }
 
     frames = []
     9.times do
-      frames << if shots.first == STRIKE
-                  [shots.shift, 0]
+      frames << if shots.first.strike?
+                  shots.shift(1)
                 else
                   shots.shift(2)
                 end
