@@ -40,7 +40,7 @@ class Frame
   end
 
   def strike_score(index, next_frame, after_next_frame)
-    bonus_point = next_frame.shots[0].score != STRIKE || index == 8 ? next_frame.shots[1].score : after_next_frame.shots[0].score
+    bonus_point = next_frame.shots[0].strike? == false || index == 8 ? next_frame.shots[1].score : after_next_frame.shots[0].score
     shots[0].score + next_frame.shots[0].score + bonus_point
   end
 end
