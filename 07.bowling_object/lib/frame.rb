@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './shot'
+require_relative 'shot'
 
 STRIKE = 10
 
@@ -28,7 +28,7 @@ class Frame
   private
 
   def spare?
-    !shots[0].strike? && [shots[0].score, shots[1].score].sum == 10
+    !strike? && [shots[0].score, shots[1].score].sum == 10
   end
 
   def strike?
