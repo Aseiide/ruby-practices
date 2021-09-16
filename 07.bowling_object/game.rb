@@ -8,7 +8,7 @@ class Game
   end
 
   def calc_score
-    @frames.map.with_index { |frame, index| Frame.new(frame).score(index, @frames[index.next], @frames[index.next.next]) }.sum
+    @frames.map.with_index { |frame, index| frame.score(index, @frames[index.next], @frames[index.next.next]) }.sum
   end
 
   def separate_frames(argv)
@@ -17,11 +17,11 @@ class Game
     frames = []
     9.times do
       frames << if shots.first.strike?
-                  shots.shift(1)
+                  Frame.new(shots.shift(1))
                 else
-                  shots.shift(2)
+                  Frame.new(shots.shift(2))
                 end
     end
-    frames << shots
+    frames << Frame.new(shots)
   end
 end
