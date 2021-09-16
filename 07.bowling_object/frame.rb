@@ -21,7 +21,7 @@ class Frame
     elsif spare? && last_frame?(index)
       spare_score(next_frame_marks)
     else
-      shots[0].score + shots[1].score + (shots[2] ? shots[2].score : 0)
+      shots.sum { |shot| shot ? shot.score : 0 }
     end
   end
 
