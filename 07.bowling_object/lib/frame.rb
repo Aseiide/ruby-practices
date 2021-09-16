@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './shot'
+require_relative 'shot'
 
 STRIKE = 10
 
