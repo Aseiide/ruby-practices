@@ -5,12 +5,10 @@ require './shot'
 STRIKE = 10
 
 class Frame
-  attr_reader :first_shot, :second_shot, :third_shot
+  attr_reader :shots
 
-  def initialize(first_shot, second_shot = nil, third_shot = nil)
-    @first_shot = Shot.new(first_shot)
-    @second_shot = Shot.new(second_shot)
-    @third_shot = Shot.new(third_shot)
+  def initialize(shots)
+    @shots = shots
   end
 
   def last_frame?(index)
@@ -23,29 +21,29 @@ class Frame
     elsif spare? && last_frame?(index)
       spare_score(next_frame_marks)
     else
-      @first_shot.score + @second_shot.score + @third_shot.score
+      shots[0].score + shots[1].score
     end
   end
 
   private
 
   def spare?
-    @first_shot.score != STRIKE && [@first_shot.score, @second_shot.score].sum == 10
+    shots[0].score != STRIKE && [shots[0].score, shots[1].score].sum == 10
   end
 
   def strike?
-    @first_shot.score == STRIKE
+    shots[0].score == STRIKE
   end
 
   def spare_score(next_frame)
-    first_shot.score + second_shot.score + Frame.new(*next_frame).first_shot.score
+    shots[0].score + shots[1].score + Frame.new(*next_frame).shots[0].score
   end
 
   def strike_score(index, next_frame_marks, after_next_frame_marks)
     next_frame = Frame.new(*next_frame_marks)
     after_next_frame = Frame.new(*after_next_frame_marks) unless after_next_frame_marks.nil?
 
-    bonus_point = next_frame.first_shot.score != STRIKE || index == 8 ? next_frame.second_shot.score : after_next_frame.first_shot.score
-    first_shot.score + next_frame.first_shot.score + bonus_point
+    bonus_point = next_frame.shots[0].score != STRIKE || index == 8 ? next_frame.shots[1].score : after_next_frame.shots[0].score
+    shots[0].score + next_frame.shots[0].score + bonus_point
   end
 end
